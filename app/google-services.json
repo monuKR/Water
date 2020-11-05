@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "411998973525",
+    "firebase_url": "https://water-c390c.firebaseio.com",
+    "project_id": "water-c390c",
+    "storage_bucket": "water-c390c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411998973525:android:697b6e96654e6909936edc",
+        "android_client_info": {
+          "package_name": "com.mindby.water"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "411998973525-a740tc3qu1hr1sav3brvdd55bqqrveds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQy9KfjjE3y7oJ6bj1hxQSimK3zT1XgLQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "411998973525-a740tc3qu1hr1sav3brvdd55bqqrveds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
