@@ -41,8 +41,7 @@ class LoginActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(
             R.id.container,
             SendOTPFragment.newInstance()
-        )
-            .commit()
+        ).commit()
 
         loginViewModel.credential.observe(this,
             {
@@ -53,7 +52,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-     fun send(phone: String) {
+    fun send(phone: String? = null) {
+
+        phone?: loginViewModel.phone.value
 
         val options = PhoneAuthOptions.newBuilder(mAuth)
             .setPhoneNumber("+91$phone")
@@ -64,53 +65,53 @@ class LoginActivity : AppCompatActivity() {
         PhoneAuthProvider.verifyPhoneNumber(options)
 
 
-     }
-
-
-
-private val callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks =
-    object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-        override fun onCodeSent(
-            verificationId: String,
-            token: PhoneAuthProvider.ForceResendingToken
-        ) {
-            super.onCodeSent(verificationId, token)
-            Log.e(ContentValues.TAG, "onCodeSent:$verificationId")
-
-            loginViewModel.storedVerificationId.value = verificationId
-            loginViewModel.resendToken.value = token
-
-            supportFragmentManager.beginTransaction().replace(R.id.container, ConfirmOTPFragment()).commit()
-
-        }
-
-        override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-
-
-        }
-
-        override fun onVerificationFailed(exception: FirebaseException) {
-        }
     }
+
+
+    private val callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks =
+        object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+            override fun onCodeSent(
+                verificationId: String,
+                token: PhoneAuthProvider.ForceResendingToken
+            ) {
+                super.onCodeSent(verificationId, token)
+                Log.e(ContentValues.TAG, "onCodeSent:$verificationId")
+
+                loginViewModel.storedVerificationId.value = verificationId
+                loginViewModel.resendToken.value = token
+
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, ConfirmOTPFragment.newInstance()).commit()
+
+            }
+
+            override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+
+
+            }
+
+            override fun onVerificationFailed(exception: FirebaseException) {
+            }
+        }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         mAuth.signInWithCredential(credential)
-        .addOnCompleteListener(this) { task ->
-            if (task.isSuccessful) {
-                Log.d(ContentValues.TAG, "signInWithCredential:success")
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Log.d(ContentValues.TAG, "signInWithCredential:success")
 
-                finish()
+                    finish()
 
-            } else {
-                Log.w(ContentValues.TAG, "signInWithCredential:failure", task.exception)
+                } else {
+                    Log.w(ContentValues.TAG, "signInWithCredential:failure", task.exception)
 
-                if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                    // The verification code entered was invalid
+                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                        // The verification code entered was invalid
 
-                    Log.e("TAGG", "invalid verification code")
+                        Log.e("TAGG", "invalid verification code")
 
+                    }
                 }
             }
-        }
-}
+    }
 }

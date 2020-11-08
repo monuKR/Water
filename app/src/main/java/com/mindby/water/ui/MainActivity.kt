@@ -1,6 +1,7 @@
 package com.mindby.water.ui
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.mindby.water.R
+import com.mindby.water.utils.MySharedPreferences
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,19 +19,19 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        mAuth.addAuthStateListener(mAuthStateListener)
 
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-
         mAuth.removeAuthStateListener(mAuthStateListener)
+
+        super.onBackPressed()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        mAuth.addAuthStateListener(mAuthStateListener)
 
 
 
@@ -42,7 +44,20 @@ class MainActivity : AppCompatActivity() {
            updateUI(user)
        }else{
            login()
+           welcomeCheck()
+
        }
+
+    }
+
+    private fun welcomeCheck(){
+        val sharedPreferences = this.getSharedPreferences(MySharedPreferences.WELCOME,0)
+
+        val isFirstTime = sharedPreferences.getBoolean(MySharedPreferences.FIRST_TIME,true)
+
+        if (isFirstTime){
+            startActivity(Intent(this,WelcomeActivity::class.java))
+        }
 
     }
 
@@ -53,6 +68,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun updateUI(user: FirebaseUser){
+        setContentView(R.layout.activity_main)
 
         val userID = findViewById<TextView>(R.id.user_id)
         Log.e("TAGG","userId${user.uid}")

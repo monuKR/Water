@@ -19,7 +19,7 @@ class SendOTPFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = ConfirmOTPFragment()
+        fun newInstance() = SendOTPFragment()
 
     }
 

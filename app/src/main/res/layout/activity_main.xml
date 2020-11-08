@@ -36,13 +36,8 @@
                         android:text="None"
                         android:textSize="20sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="DASHBOARD"
-                        android:textSize="30sp"
-                        android:elevation="10000dp"/>
+                    <include
+                        layout="@layout/layout_dashboard"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
