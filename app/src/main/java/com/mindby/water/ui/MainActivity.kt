@@ -1,7 +1,6 @@
 package com.mindby.water.ui
 
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -40,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     private val mAuthStateListener = FirebaseAuth.AuthStateListener {
         val user = it.currentUser
 
+
        if (user != null){
            updateUI(user)
        }else{
@@ -72,8 +72,11 @@ class MainActivity : AppCompatActivity() {
 
         val userID = findViewById<TextView>(R.id.user_id)
         Log.e("TAGG","userId${user.uid}")
+
         userID.text = user.uid
     }
 
-    fun modules(view: View) {}
+    fun modules(view: View) {
+        startActivity(Intent(this,StudyModulesActivity::class.java))
+    }
 }

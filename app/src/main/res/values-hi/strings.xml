@@ -3,4 +3,7 @@
     <string name="dark">Dark</string>
     <string name="light">Light</string>
     <string name="system_default">System Default</string>
+    <string name="test">Test</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
 </resources>

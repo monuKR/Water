@@ -20,6 +20,9 @@ class LoginActivity : AppCompatActivity() {
 
     lateinit var loginViewModel: LoginViewModel
 
+    lateinit var sendOTPFragment: SendOTPFragment
+    lateinit var confirmOTPFragment: ConfirmOTPFragment
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +41,9 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
-        supportFragmentManager.beginTransaction().replace(
-            R.id.container,
-            SendOTPFragment.newInstance()
-        ).commit()
+        sendOTPFragment = SendOTPFragment.newInstance()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, sendOTPFragment).commit()
 
         loginViewModel.credential.observe(this,
             {
@@ -54,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun send(phone: String? = null) {
 
-        phone?: loginViewModel.phone.value
+        phone ?: loginViewModel.phone.value
 
         val options = PhoneAuthOptions.newBuilder(mAuth)
             .setPhoneNumber("+91$phone")
@@ -80,8 +82,12 @@ class LoginActivity : AppCompatActivity() {
                 loginViewModel.storedVerificationId.value = verificationId
                 loginViewModel.resendToken.value = token
 
+                confirmOTPFragment = ConfirmOTPFragment.newInstance()
+
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, ConfirmOTPFragment.newInstance()).commit()
+                    .replace(R.id.container, confirmOTPFragment).commit()
+
+//                confirmOTPFragment.startCountDown()
 
             }
 
@@ -107,6 +113,8 @@ class LoginActivity : AppCompatActivity() {
 
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         // The verification code entered was invalid
+
+                        confirmOTPFragment.otpEditText.error = "Incorrect OTP"
 
                         Log.e("TAGG", "invalid verification code")
 

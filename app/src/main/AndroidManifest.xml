@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Water">
-        <activity android:name=".ui.WelcomeActivity"></activity>
-        <activity android:name=".ui.LoginActivity"
-            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.StudyModulesActivity"></activity>
+        <activity android:name=".ui.WelcomeActivity" />
+        <activity
+            android:name=".ui.LoginActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

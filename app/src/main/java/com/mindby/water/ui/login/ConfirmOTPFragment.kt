@@ -18,8 +18,9 @@ import com.mindby.water.ui.LoginActivity
 class ConfirmOTPFragment : Fragment() {
 
     lateinit var loginViewModel: LoginViewModel
-    lateinit var resendOTP : Button
-    lateinit var timer : TextView
+    lateinit var resendOTP: Button
+    lateinit var timer: TextView
+    lateinit var otpEditText: EditText
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
 
@@ -36,10 +37,10 @@ class ConfirmOTPFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_confirm_o_t_p, container, false)
 
-        val otpEditText = view.findViewById<EditText>(R.id.otp)
+        otpEditText = view.findViewById<EditText>(R.id.otp)
         val confirmOTP = view.findViewById<Button>(R.id.confirm_OTP)
-         resendOTP = view.findViewById<Button>(R.id.resend_otp)
-         timer = view.findViewById<TextView>(R.id.countdown_timer)
+        resendOTP = view.findViewById<Button>(R.id.resend_otp)
+        timer = view.findViewById<TextView>(R.id.countdown_timer)
 
         otpEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -53,9 +54,6 @@ class ConfirmOTPFragment : Fragment() {
             }
         })
 
-        // TODO() using count down properly
-        startCountDown()
-
 
         confirmOTP.setOnClickListener {
 
@@ -67,10 +65,10 @@ class ConfirmOTPFragment : Fragment() {
             val activity: LoginActivity = activity as LoginActivity
             activity.send()
         }
-        return view;
+        return view
     }
 
-    private fun startCountDown(){
+    public fun startCountDown() {
         resendOTP.isEnabled = false
         object : CountDownTimer(60000, 1000) {
             override fun onTick(millisUntilFinished: Long) {

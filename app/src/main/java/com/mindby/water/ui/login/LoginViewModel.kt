@@ -9,7 +9,7 @@ class LoginViewModel() : ViewModel() {
 
 
     var phone = MutableLiveData<String>()
-    var otp = MutableLiveData<String>()
+    var resendCountDownStart = MutableLiveData<Boolean>()
     val storedVerificationId = MutableLiveData<String>()
     val resendToken = MutableLiveData<PhoneAuthProvider.ForceResendingToken>()
     val credential = MutableLiveData<PhoneAuthCredential>()

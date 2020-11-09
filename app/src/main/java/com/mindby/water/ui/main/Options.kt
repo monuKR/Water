@@ -33,7 +33,7 @@ class Options : BottomSheetDialogFragment() {
 
 
     companion object {
-        fun newInstance(): Options = Options()
+        fun newInstance() = Options()
 
     }
 }
