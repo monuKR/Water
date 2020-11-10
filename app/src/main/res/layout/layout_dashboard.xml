@@ -21,7 +21,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_baseline_more_vert_24"/>
+                android:src="@drawable/ic_baseline_more_vert_24"
+                android:layout_margin="16dp"
+                android:onClick="openMenu"/>
 
             <FrameLayout
                 android:layout_width="match_parent"

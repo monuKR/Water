@@ -9,6 +9,7 @@ import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.mindby.water.R
+import com.mindby.water.ui.main.Menu
 import com.mindby.water.utils.MySharedPreferences
 
 class MainActivity : AppCompatActivity() {
@@ -78,5 +79,9 @@ class MainActivity : AppCompatActivity() {
 
     fun modules(view: View) {
         startActivity(Intent(this,StudyModulesActivity::class.java))
+    }
+
+    fun openMenu(view: View) {
+        Menu.newInstance().show(supportFragmentManager,"dialog")
     }
 }

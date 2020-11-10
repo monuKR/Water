@@ -2,12 +2,9 @@ package com.mindby.water.ui.main
 
 import android.os.Bundle
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.mindby.water.R
 
 
@@ -20,7 +17,7 @@ import com.mindby.water.R
  *    Options.newInstance(30).show(supportFragmentManager, "dialog")
  * </pre>
  */
-class Options : BottomSheetDialogFragment() {
+class Menu : BottomSheetDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +30,7 @@ class Options : BottomSheetDialogFragment() {
 
 
     companion object {
-        fun newInstance() = Options()
+        fun newInstance() = Menu()
 
     }
 }
